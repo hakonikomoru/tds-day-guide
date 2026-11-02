@@ -162,6 +162,14 @@ details.place .inner { padding-top: 0; }
 .zoom img { display: block; width: 1100px; max-width: none; height: auto; }
 @media (min-width: 1140px) { .zoom img { width: 100%; max-width: 1100px; } }
 .zoom-close { position: absolute; top: calc(10px + env(safe-area-inset-top, 0px)); right: calc(10px + env(safe-area-inset-right, 0px)); font: inherit; font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 999px; border: 0; background: #fff; color: #14262E; cursor: pointer; }
+.calc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 10px; }
+.calc label { font-weight: 700; }
+.calc-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.calc input, .calc select { font: inherit; font-size: 16px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.calc-out { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); }
+.calc-out dt { font-size: 13px; color: var(--muted); padding-top: 3px; }
+.calc-out dd { margin: 0; font-weight: 700; font-size: 16px; }
+.calc-out dd.key { font-family: var(--font-display); font-size: 20px; color: var(--accent); }
 .empty { padding: 14px; text-align: center; color: var(--muted); }
 .sub-h { font-size: 16px; font-weight: 700; margin-top: 6px; }
 .box { background: var(--surface); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; }
@@ -203,6 +211,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <a href="#now">いま</a>
     <a href="#move">朝の移動</a>
     <a href="#day">1日の流れ</a>
+    <a href="#home">帰り</a>
     <a href="#food" class="food-link">フード</a>
     <a href="#shop">買い物</a>
     <a href="#prep">準備</a>
@@ -251,37 +260,80 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       <p class="note"><a href="https://yasushi-duffy.com/maihama-to-tds/" target="_blank" rel="noopener">写真つきの徒歩ルート（個人の実測記事）</a></p>
     </div>
   </details>
-  <details>
-    <summary>帰り</summary>
-    <div class="inner"><p>18:00ごろ退園。舞浜 → 南流山 → 流山おおたかの森 が基本。時刻は出るときに再検索する。</p></div>
-  </details>
 </section>
 
 <section id="day">
   <h2>1日の流れ <small>午前のショップ枠が取れた場合</small></h2>
   <ol class="day num" id="day-list">
-    <li class="slot" data-from="6:20" data-to="9:00"><time>6:20〜</time><div class="body"><p class="what">待機・トイレ・アプリ準備</p><p class="detail">開園予定は9:00。6時台にパスが取れるわけではない。</p></div></li>
-    <li class="slot" data-from="9:00" data-to="9:15"><time>入園直後</time><div class="body"><p class="what">パスと注文を分担</p><p class="detail">二人とも入園してから。一人が二人分のショップのスタンバイパス、もう一人は自分のアカウントでアプリ限定バッジを注文。パス担当も後で自分の分を注文。</p></div></li>
-    <li class="slot" data-from="9:15" data-to="10:45"><time>9:15〜10:45</time><div class="body"><p class="what">買い物の時間①</p><p class="detail">ショップでまとめて会計（対象店を通じて1日1回）。空き時間にバケットのワゴン。</p></div></li>
+    <li class="slot" data-from="6:20" data-to="7:30"><time>6:20〜</time><div class="body"><p class="what">待機・トイレ・アプリ準備</p><p class="detail">開園予定は9:00（早まる場合あり、下の「開園時間」）。6時台にパスが取れるわけではない。</p></div></li>
+    <li class="slot" data-from="7:30" data-to="8:30"><time>7:30〜8:00</time><div class="body"><p class="what">チケット・アプリ・担当の最終確認</p><p class="detail">チケット表示、ログイン、二人の共有、購入担当。早い案内が来てもすぐ動ける状態に。8:00は準備の目安で、開園時刻ではない。</p></div></li>
+    <li class="slot" data-from="8:30" data-to="9:15"><time>入園したら</time><div class="body"><p class="what">パスと注文を分担（9:00を待たない）</p><p class="detail">二人とも入園してから。早く入れたらその場で確認。一人が二人分のショップのスタンバイパス、もう一人は自分のアカウントでアプリ限定バッジを注文。パス担当も後で自分の分を注文。</p></div></li>
+    <li class="slot" data-from="9:15" data-to="10:45"><time>9:15〜10:45</time><div class="body"><p class="what">買い物の時間①</p><p class="detail">店頭で買う仮の枠（パス確認・注文はもっと早くてよい）。ショップでまとめて会計（対象店を通じて1日1回）。空き時間にバケットのワゴン。</p></div></li>
     <li class="slot meal" data-from="10:45" data-to="11:45"><time>10:45〜11:45</time><div class="body"><p class="what"><a href="#food">早めのランチ</a></p><p class="detail">第一候補ザンビーニ。グミケース・カップ・タンブラーをここで確認。座って休む。</p></div></li>
     <li class="slot" data-from="11:45" data-to="12:15"><time>11:45〜12:15</time><div class="body"><p class="what">ファンタジースプリングスへ移動</p><p class="detail">写真・トイレ込みで余裕をもって。</p></div></li>
     <li class="slot" data-from="12:15" data-to="14:30"><time>12:15〜14:30</time><div class="body"><p class="what">本命ライド1つ＋散策</p><p class="detail">仮候補はラプンツェル。二人の希望が別ならそちらに。人気ライドを何個も狙わない。</p></div></li>
     <li class="slot meal" data-from="14:30" data-to="15:00"><time>14:30〜15:00</time><div class="body"><p class="what"><a href="#food">座って休憩・軽食</a></p><p class="detail">朝が早いので休憩は予定に入れておく。</p></div></li>
     <li class="slot" data-from="15:00" data-to="16:15"><time>15:00〜16:15</time><div class="body"><p class="what">戻りながらもう1つ</p><p class="detail">シンドバッドなど。買い物が残っていればそちら優先、ライドは減らす。</p></div></li>
     <li class="slot meal" data-from="16:15" data-to="17:15"><time>16:15〜17:15</time><div class="body"><p class="what">ハーバーで景色・写真・<a href="#food">軽食</a></p><p class="detail">出口に近いエリアへ戻る。</p></div></li>
-    <li class="slot" data-from="17:15" data-to="18:00"><time>17:15〜17:45</time><div class="body"><p class="what">トイレ・荷物・出口へ</p><p class="detail">買えたもの・通販注文・持ち物を確認。長い列には新しく並ばない。</p></div></li>
-    <li class="slot" data-from="18:00" data-to="19:00"><time>18:00ごろ</time><div class="body"><p class="what">退園</p><p class="detail">19:15のビリーヴ！は今回入れない。帰りの電車は再検索。</p></div></li>
+    <li class="slot" data-from="17:15" data-to="18:00"><time>17:15〜17:45</time><div class="body"><p class="what">トイレ・荷物・出口へ</p><p class="detail">買えたもの・通販注文・持ち物を確認。長い列には新しく並ばない。退園を早めるならここも前倒し。</p></div></li>
+    <li class="slot" data-from="18:00" data-to="19:00"><time>18:00ごろ</time><div class="body"><p class="what"><a href="#home">退園（仮の目安）</a></p><p class="detail">新幹線の時刻しだいで早める。退園後は宿泊先で荷物回収 → 新幹線へ。19:15のビリーヴ！は入れない。</p></div></li>
   </ol>
+
+  <h3 class="sub-h">開園時間</h3>
+  <div class="box">
+    <p>11/4の公式営業時間は<b>9:00〜21:00</b>。安全のため一般入園を早めることがあると公式が案内している。当日何時からかは事前に決まっていないので、放送とキャストの案内に従う。</p>
+    <div class="swap num">
+      <div><b>9:00</b><span>公式の開園予定。前倒しがなければこれ。</span></div>
+      <div><b>8:45</b><span>15分早まった例。9/4の来園記に一般8:45・ハッピーエントリー8:30の放送。</span></div>
+      <div><b>8:30</b><span>30分早まった例。10/12の来園記に7:45ごろ案内があり、一般8:30・ハッピーエントリー8:15。</span></div>
+    </div>
+    <p class="note">8:30・8:45は個人の来園記にある過去の例で、11/4の予想ではない。一般入園の開始、保安検査の開始、自分がゲートを通る時刻は別。早く入れても店やライドが全部早く始まるわけではない。</p>
+    <p class="note">ハッピーエントリーはミラコスタとファンタジースプリングスホテルの宿泊者向け（一般の5〜15分前）。こもるは一般入園。二人とも特典で入る前提にはしない。</p>
+    <p class="note"><a href="https://www.tokyodisneyresort.jp/hotel/topics/info/happy_entry/" target="_blank" rel="noopener">公式の前倒し・ハッピーエントリー案内</a>・<a href="https://plaza.rakuten.co.jp/massirosiro/diary/202609040000/" target="_blank" rel="noopener">9/4の来園記</a>・<a href="https://shigekiroku.com/2026/10/16/disneysea-family-trip-2026-autumn/" target="_blank" rel="noopener">10/12の来園記</a></p>
+  </div>
 
   <details>
     <summary>ショップのパス時刻で入れ替える</summary>
     <div class="inner swap">
       <div><b>午前の枠</b><span>上の流れのまま。</span></div>
       <div><b>12〜15時台</b><span>午前はバケット・ランチ・近場の体験。ショップの後に遊ぶ。本命や散策を短く。</span></div>
-      <div><b>16時台以降</b><span>先に本命と食事、余裕をもってショップへ戻る。18時に出られる枠だけ選ぶ。</span></div>
+      <div><b>16時台以降</b><span>先に本命と食事、余裕をもってショップへ戻る。新幹線から逆算した退園時刻（今は18時の仮目安）に間に合う枠だけ選ぶ。</span></div>
       <div><b>間に合う枠なし</b><span>通販でよい物はアプリで在庫確認。フィギュア単品は通販だとBOXのみなので勝手に変えない。</span></div>
     </div>
   </details>
+</section>
+
+<section id="home">
+  <h2>帰り <small>荷物回収と新幹線</small></h2>
+  <p>順番は <b>退園 → 宿泊先で荷物回収 → JR駅 → 東京駅 → 新幹線</b>。18:00退園は仮の目安で、新幹線の時刻が分かったら逆算して早める。東京駅から乗るのは見込みで、駅・列車・時刻はまだ未確認。</p>
+
+  <div class="calc">
+    <label for="shinkansen">新幹線の発車時刻</label>
+    <div class="calc-row">
+      <input type="time" id="shinkansen" value="20:30" step="300">
+      <select id="extra" aria-label="荷物回収で増える時間">
+        <option value="30">荷物回収 +30分</option>
+        <option value="45">荷物回収 +45分</option>
+        <option value="60" selected>荷物回収 +60分</option>
+        <option value="90">荷物回収 +90分</option>
+      </select>
+    </div>
+    <dl class="calc-out num" id="calc-out"></dl>
+    <p class="note">シーから東京駅へ直行で約90分の枠＋荷物回収で増える時間、で逆算した仮の配分。時刻表の値ではない。例：+60分なら 20:00発→17:30退園、20:30発→18:00退園。</p>
+  </div>
+
+  <ul class="plain-list">
+    <li>舞浜から東京駅はJR京葉線・武蔵野線の「東京行」で約20分（列車待ち・駅の移動は別）。</li>
+    <li>東京駅は京葉線ホームが地下深く、新幹線までの標準乗換が20分。京葉線ホームには発車の30〜40分前に着く。ごはん・買い物・きっぷ受取があるならさらに足す。</li>
+    <li>退園を早めるなら、最後のショップ枠・体験・写真・トイレも同じだけ前倒し。</li>
+    <li>東京以外の駅から乗るならこの計算は使わない。</li>
+  </ul>
+
+  <h3 class="sub-h">こもるの帰り</h3>
+  <div class="box">
+    <p>どこまで一緒に行くかは未定。<b>舞浜で別れる</b>なら 舞浜 → 南流山 → 流山おおたかの森。<b>東京駅まで行く</b>なら、そこから帰り道を検索する。</p>
+    <p class="note"><a href="https://www.jreast.co.jp/estation/stations/1039.html" target="_blank" rel="noopener">東京駅の構内図・乗換時間</a>・<a href="https://media.jreast.co.jp/articles/905" target="_blank" rel="noopener">東京〜舞浜のアクセス</a>・<a href="https://timetables.jreast.co.jp/timetable/list1414.html" target="_blank" rel="noopener">舞浜駅の時刻表</a></p>
+  </div>
 </section>
 
 <section id="food">
@@ -377,12 +429,13 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <li><label><input type="checkbox" id="p-ic"><span>Suica・PASMOの残高</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-bag"><span>モバイルバッテリー・上着・雨具・歩き慣れた靴</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-snack"><span>差し入れのパン（するなら）</span><span></span></label></li>
+    <li><label><input type="checkbox" id="p-train"><span>新幹線の乗車駅・発車時刻が分かったら、<a href="#home">帰り</a>で退園時刻を決める</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-weather"><span>天気予報と電車の運行情報を見る</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-meet"><span>集合場所・時刻を決める（駅改札外など公共の場所）</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-sleep"><span>早めに寝る</span><span></span></label></li>
   </ul>
   <div class="box">
-    <p><b>11/4のパーク</b>：9:00〜21:00。ビリーヴ！19:15予定（今回は見ない）。</p>
+    <p><b>11/4のパーク</b>：9:00〜21:00。一般入園は早まることがある（<a href="#day">開園時間</a>）。ビリーヴ！19:15予定（今回は見ない）。</p>
     <p><b>休止</b>：タワー・オブ・テラー（11/5まで）、インディ・ジョーンズ、マーメイドラグーンシアター、トランジットスチーマーのハーバー発着。アクアトピアは営業終了。</p>
     <p><b>雨なら</b>：マーメイドラグーンの屋内側などへ。</p>
     <p class="note"><a href="https://www.tokyodisneyresort.jp/tds/daily/calendar/20261104" target="_blank" rel="noopener">11/4の公式カレンダー</a>・<a href="https://www.tokyodisneyresort.jp/tds/monthly/stop.html" target="_blank" rel="noopener">休止情報</a></p>
@@ -544,7 +597,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     } else if (now.m < mins("6:20")) {
       card.innerHTML = "<b>" + hhmm + "　移動中</b><p class=\"note\">5:12 TX → 5:27 JR武蔵野線 → 5:56舞浜 → 6:03モノレール。下の「朝の移動」を見る。</p>";
     } else {
-      card.innerHTML = "<b>" + hhmm + "　おつかれさま</b><p class=\"note\">帰りは舞浜 → 南流山 → 流山おおたかの森。時刻は再検索。</p>";
+      card.innerHTML = "<b>" + hhmm + "　おつかれさま</b><p class=\"note\">帰りは「帰り」の章を見る。舞浜で別れるなら舞浜 → 南流山 → 流山おおたかの森。</p>";
     }
     render();
   }
@@ -601,6 +654,28 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     zoom.querySelector(".zoom-close").focus();
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeZoom(); });
+
+  // 帰りの逆算（新幹線発車から）
+  var shin = document.getElementById("shinkansen"), extra = document.getElementById("extra"), out = document.getElementById("calc-out");
+  try {
+    var sv = JSON.parse(localStorage.getItem("home-calc") || "null");
+    if (sv) { shin.value = sv.t || shin.value; extra.value = sv.x || extra.value; }
+  } catch (e) {}
+  function fmt(m) { m = (m + 1440) % 1440; return Math.floor(m / 60) + ":" + String(m % 60).padStart(2, "0"); }
+  function calc() {
+    if (!shin.value) { out.innerHTML = "<dt>退園</dt><dd>発車時刻を入れてください</dd>"; return; }
+    var dep = mins(shin.value), x = +extra.value;
+    var leave = dep - 90 - x;
+    out.innerHTML =
+      '<dt>退園の目安</dt><dd class="key">' + fmt(leave) + "</dd>" +
+      "<dt>出口へ向かう</dt><dd>" + fmt(leave - 45) + "ごろから（トイレ・荷物）</dd>" +
+      "<dt>京葉線ホーム着</dt><dd>" + fmt(dep - 40) + "〜" + fmt(dep - 30) + "</dd>" +
+      "<dt>新幹線</dt><dd>" + fmt(dep) + " 発</dd>";
+    try { localStorage.setItem("home-calc", JSON.stringify({ t: shin.value, x: extra.value })); } catch (e) {}
+  }
+  shin.addEventListener("input", calc);
+  extra.addEventListener("change", calc);
+  calc();
 
   updateNow();
   setInterval(updateNow, 60000);
