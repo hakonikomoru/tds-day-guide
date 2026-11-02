@@ -66,7 +66,9 @@ p { margin: 0; }
 .nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 8px; scrollbar-width: none; }
 .nav .wrap::-webkit-scrollbar { display: none; }
 .nav a { flex: none; text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
-.nav a.food-link { background: var(--food-soft); border-color: var(--food-strong); color: var(--food); }
+.nav a.food-link { color: var(--food); }
+.nav a.ext { border-style: dashed; color: var(--muted); }
+.nav a[aria-current="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 
 section { padding-block: 26px 6px; display: grid; gap: 14px; scroll-margin-top: calc(56px + env(safe-area-inset-top, 0px)); }
 section > h2 { font-size: 21px; font-weight: 900; display: flex; align-items: baseline; gap: 10px; }
@@ -144,7 +146,6 @@ details ul, .plain-list { margin: 0; padding-left: 1.2em; display: grid; gap: 4p
 .facts dd { margin: 0; min-width: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 5px; }
 .tag { font-size: 12px; padding: 1px 8px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); }
-.tag.sv { border-color: var(--food-strong); color: var(--food); font-weight: 700; }
 .tag.mo { border-color: var(--accent); color: var(--accent); }
 .shop .links { display: flex; gap: 14px; font-size: 13px; }
 .map-btn { all: unset; cursor: pointer; position: relative; display: block; border-radius: 10px; overflow: hidden; background: var(--accent-soft); }
@@ -170,6 +171,12 @@ details.place .inner { padding-top: 0; }
 .calc-out dt { font-size: 13px; color: var(--muted); padding-top: 3px; }
 .calc-out dd { margin: 0; font-weight: 700; font-size: 16px; }
 .calc-out dd.key { font-family: var(--font-display); font-size: 20px; color: var(--accent); }
+.closed { border: 1px solid var(--warn); background: var(--warn-soft); border-radius: 12px; padding: 12px 14px; display: grid; gap: 8px; }
+.closed h3 { font-size: 15px; color: var(--warn); }
+.closed ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.closed li { display: grid; gap: 0; font-size: 14px; }
+.closed li span { font-size: 13px; color: var(--muted); }
+.shop .dpa { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; white-space: nowrap; background: var(--accent-soft); color: var(--accent); }
 .empty { padding: 14px; text-align: center; color: var(--muted); }
 .sub-h { font-size: 16px; font-weight: 700; margin-top: 6px; }
 .box { background: var(--surface); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; }
@@ -203,7 +210,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
 <header class="wrap top">
   <p class="eyebrow num">2026.11.4（水）東京ディズニーシー</p>
   <h1>シー1日ガイド</h1>
-  <p class="sub">流山おおたかの森の始発から、園内の過ごし方、フード、買い物まで。こもる用。情報は11/2時点の確認で、当日はアプリを優先。</p>
+  <p class="sub">流山おおたかの森の始発から、園内の過ごし方、帰り、フードまで。こもる用。買い物は<a href="https://hakonikomoru.github.io/tds-shopping-navi/" target="_blank" rel="noopener">シー買い物ナビ</a>で。情報は11/2時点の確認で、当日はアプリを優先。</p>
 </header>
 
 <nav class="nav" aria-label="章">
@@ -211,11 +218,11 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <a href="#now">いま</a>
     <a href="#move">朝の移動</a>
     <a href="#day">1日の流れ</a>
-    <a href="#home">帰り</a>
     <a href="#food" class="food-link">フード</a>
-    <a href="#shop">買い物</a>
+    <a href="#rides">アトラクション</a>
+    <a href="#home">帰り</a>
     <a href="#prep">準備</a>
-    <a href="#rides">体験候補</a>
+    <a href="https://hakonikomoru.github.io/tds-shopping-navi/" target="_blank" rel="noopener" class="ext">買い物ナビ↗</a>
   </div>
 </nav>
 
@@ -268,8 +275,8 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <li class="slot" data-from="6:20" data-to="7:30"><time>6:20〜</time><div class="body"><p class="what">待機・トイレ・アプリ準備</p><p class="detail">開園予定は9:00（早まる場合あり、下の「開園時間」）。6時台にパスが取れるわけではない。</p></div></li>
     <li class="slot" data-from="7:30" data-to="8:30"><time>7:30〜8:00</time><div class="body"><p class="what">チケット・アプリ・担当の最終確認</p><p class="detail">チケット表示、ログイン、二人の共有、購入担当。早い案内が来てもすぐ動ける状態に。8:00は準備の目安で、開園時刻ではない。</p></div></li>
     <li class="slot" data-from="8:30" data-to="9:15"><time>入園したら</time><div class="body"><p class="what">パスと注文を分担（9:00を待たない）</p><p class="detail">二人とも入園してから。早く入れたらその場で確認。一人が二人分のショップのスタンバイパス、もう一人は自分のアカウントでアプリ限定バッジを注文。パス担当も後で自分の分を注文。</p></div></li>
-    <li class="slot" data-from="9:15" data-to="10:45"><time>9:15〜10:45</time><div class="body"><p class="what">買い物の時間①</p><p class="detail">店頭で買う仮の枠（パス確認・注文はもっと早くてよい）。ショップでまとめて会計（対象店を通じて1日1回）。空き時間にバケットのワゴン。</p></div></li>
-    <li class="slot meal" data-from="10:45" data-to="11:45"><time>10:45〜11:45</time><div class="body"><p class="what"><a href="#food">早めのランチ</a></p><p class="detail">第一候補ザンビーニ。グミケース・カップ・タンブラーをここで確認。座って休む。</p></div></li>
+    <li class="slot" data-from="9:15" data-to="10:45"><time>9:15〜10:45</time><div class="body"><p class="what"><a href="https://hakonikomoru.github.io/tds-shopping-navi/" target="_blank" rel="noopener">買い物の時間①</a></p><p class="detail">店頭で買う仮の枠（パス確認・注文はもっと早くてよい）。詳しくはシー買い物ナビ。</p></div></li>
+    <li class="slot meal" data-from="10:45" data-to="11:45"><time>10:45〜11:45</time><div class="body"><p class="what"><a href="#food">早めのランチ</a></p><p class="detail">第一候補ザンビーニ。座って休む。</p></div></li>
     <li class="slot" data-from="11:45" data-to="12:15"><time>11:45〜12:15</time><div class="body"><p class="what">ファンタジースプリングスへ移動</p><p class="detail">写真・トイレ込みで余裕をもって。</p></div></li>
     <li class="slot" data-from="12:15" data-to="14:30"><time>12:15〜14:30</time><div class="body"><p class="what">本命ライド1つ＋散策</p><p class="detail">仮候補はラプンツェル。二人の希望が別ならそちらに。人気ライドを何個も狙わない。</p></div></li>
     <li class="slot meal" data-from="14:30" data-to="15:00"><time>14:30〜15:00</time><div class="body"><p class="what"><a href="#food">座って休憩・軽食</a></p><p class="detail">朝が早いので休憩は予定に入れておく。</p></div></li>
@@ -301,6 +308,73 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       <div><b>間に合う枠なし</b><span>通販でよい物はアプリで在庫確認。フィギュア単品は通販だとBOXのみなので勝手に変えない。</span></div>
     </div>
   </details>
+</section>
+
+<section id="food">
+  <h2>フード <small>ランチ・軽食・休憩</small></h2>
+  <p class="note">営業時間は公式一覧で11/4を選んで確認した予定。どこも未予約・未注文。MO＝モバイルオーダー（席の確保ではない）。</p>
+  <div class="closed">
+    <h3>11/4にお休みの飲食</h3>
+    <ul>
+      <li><b>ミゲルズ・エルドラド・キャンティーナ</b><span>11/3〜11/12 休止</span></li>
+      <li><b>テディ・ルーズヴェルト・ラウンジ</b><span>テラス席だけ休止（店内は別）</span></li>
+      <li><b>アイスクリームワゴン</b><span>リバティ・ランディング・ダイナー前と、アグラバーマーケットプレイス前が休止</span></li>
+    </ul>
+  </div>
+
+  <div class="quick" id="quick">
+    <button type="button" data-pick="zambini"><span>入口側（ハーバー）で買い物が終わった</span><span>ザンビーニ</span></button>
+    <button type="button" data-pick="nydeli"><span>ニューヨークの街並みにいる</span><span>ニューヨーク・デリ</span></button>
+    <button type="button" data-pick="cookoff"><span>アーント・ペグズ（ケープコッド）の近く</span><span>クックオフ</span></button>
+    <button type="button" data-pick="back"><span>もう奥側にいる</span><span>ユカタン／カスバ</span></button>
+    <button type="button" data-pick="snuggly"><span>ファンタジースプリングスにいる</span><span>スナグリー</span></button>
+    <button type="button" data-pick="snack"><span>小腹が空いた・パンでいい</span><span>マンマ／デリ</span></button>
+  </div>
+
+  <input class="search" id="food-q" type="search" placeholder="店名・料理で探す（例：カレー、パスタ、バーガー）" aria-label="フードを検索">
+
+  <div class="chips" role="group" aria-label="エリア">
+    <span class="chip-label">エリア</span>
+    <button type="button" class="chip" data-area="all" aria-pressed="true">すべて</button>
+    <button type="button" class="chip" data-area="harbor" aria-pressed="false">ハーバー</button>
+    <button type="button" class="chip" data-area="awf" aria-pressed="false">アメリカンWF</button>
+    <button type="button" class="chip" data-area="back" aria-pressed="false">奥側</button>
+    <button type="button" class="chip" data-area="fs" aria-pressed="false">FS</button>
+  </div>
+  <div class="chips" role="group" aria-label="条件">
+    <span class="chip-label">条件</span>
+    <button type="button" class="chip" data-flag="open" aria-pressed="false">いま営業中</button>
+    <button type="button" class="chip" data-flag="mo" aria-pressed="false">MOできる</button>
+  </div>
+  <p class="count" id="food-count" aria-live="polite"></p>
+  <div class="shops" id="shops"></div>
+
+  <h3 class="sub-h">朝ごはん・差し入れ</h3>
+  <div class="box">
+    <p>朝食は各自で食べてくる前提。こもるは出発前に軽く。舞浜で朝食店には寄らない。</p>
+    <p>差し入れするなら、常温で持てる小さめの個包装パン1〜2個を前日に用意。「小腹すいたとき用に、よかったら」くらいで、食べるかは任せる。</p>
+    <p>持ってきた食べ物は園内で食べず、パーク外の<a href="https://www.tokyodisneyresort.jp/tds/service/detail/051.html" target="_blank" rel="noopener">ピクニックエリア</a>で。早朝に使えるかは現地のキャストに確認。</p>
+    <p class="note">舞浜駅のNewDaysは6:30開店、BECK'Sは7:00開店。5:56着の時点ではどちらも開いていない。</p>
+  </div>
+
+</section>
+
+
+<section id="rides">
+  <h2>アトラクション <small>本命は1つ</small></h2>
+  <div class="closed" id="closed">
+    <h3>11/4にお休み</h3>
+    <ul>
+      <li><b>タワー・オブ・テラー</b><span>9/28〜11/5 休止</span></li>
+      <li><b>インディ・ジョーンズ・アドベンチャー</b><span>〜11/29 休止</span></li>
+      <li><b>トランジットスチーマーライン（ハーバー発着）</b><span>〜11/30 休止。ほかの乗り場は運行</span></li>
+      <li><b>マーメイドラグーンシアター</b><span>休止中（再開未定）。エリアは入れる</span></li>
+      <li><b>アクアトピア</b><span>9/14で営業終了</span></li>
+    </ul>
+    <p class="note">公式の各アトラクションページの休止情報で確認（11/2）。下の候補8つは11/4に休止予定なし。当日の急な休止はアプリで確認。<a href="https://www.tokyodisneyresort.jp/tds/monthly/stop.html" target="_blank" rel="noopener">公式の休止情報</a></p>
+  </div>
+  <div class="shops" id="attrs"></div>
+  <p class="note">DPAは有料・未購入。二人分を勝手に買わない。次のDPAは「購入から60分後」か「利用開始」の早い方から買える。一人で乗るのが不安と聞いているので、一緒に体験できる形を優先。</p>
 </section>
 
 <section id="home">
@@ -336,91 +410,6 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   </div>
 </section>
 
-<section id="food">
-  <h2>フード <small>ランチ・軽食・休憩</small></h2>
-  <p class="note">営業時間は公式一覧で11/4を選んで確認した予定。どこも未予約・未注文。MO＝モバイルオーダー（席の確保ではない）。</p>
-
-  <div class="quick" id="quick">
-    <button type="button" data-pick="zambini"><span>入口側（ハーバー）で買い物が終わった</span><span>ザンビーニ</span></button>
-    <button type="button" data-pick="nydeli"><span>ニューヨークの街並みにいる</span><span>ニューヨーク・デリ</span></button>
-    <button type="button" data-pick="cookoff"><span>アーント・ペグズ（ケープコッド）の近く</span><span>クックオフ</span></button>
-    <button type="button" data-pick="back"><span>もう奥側にいる</span><span>ユカタン／カスバ</span></button>
-    <button type="button" data-pick="snuggly"><span>ファンタジースプリングスにいる</span><span>スナグリー</span></button>
-    <button type="button" data-pick="sv3"><span>グミ・カップ・タンブラーを1店で見たい</span><span>ザンビーニ／カスバ</span></button>
-    <button type="button" data-pick="snack"><span>小腹が空いた・パンでいい</span><span>マンマ／デリ</span></button>
-  </div>
-
-  <input class="search" id="food-q" type="search" placeholder="店名・料理で探す（例：カレー、パスタ、バーガー）" aria-label="フードを検索">
-
-  <div class="chips" role="group" aria-label="エリア">
-    <span class="chip-label">エリア</span>
-    <button type="button" class="chip" data-area="all" aria-pressed="true">すべて</button>
-    <button type="button" class="chip" data-area="harbor" aria-pressed="false">ハーバー</button>
-    <button type="button" class="chip" data-area="awf" aria-pressed="false">アメリカンWF</button>
-    <button type="button" class="chip" data-area="back" aria-pressed="false">奥側</button>
-    <button type="button" class="chip" data-area="fs" aria-pressed="false">FS</button>
-  </div>
-  <div class="chips" role="group" aria-label="条件">
-    <span class="chip-label">条件</span>
-    <button type="button" class="chip" data-flag="open" aria-pressed="false">いま営業中</button>
-    <button type="button" class="chip" data-flag="mo" aria-pressed="false">MOできる</button>
-    <button type="button" class="chip" data-flag="gummy" aria-pressed="false">グミケース</button>
-    <button type="button" class="chip" data-flag="cup" aria-pressed="false">カップ</button>
-    <button type="button" class="chip" data-flag="tumbler" aria-pressed="false">タンブラー</button>
-  </div>
-  <p class="count" id="food-count" aria-live="polite"></p>
-  <div class="shops" id="shops"></div>
-
-  <h3 class="sub-h">朝ごはん・差し入れ</h3>
-  <div class="box">
-    <p>朝食は各自で食べてくる前提。こもるは出発前に軽く。舞浜で朝食店には寄らない。</p>
-    <p>差し入れするなら、常温で持てる小さめの個包装パン1〜2個を前日に用意。「小腹すいたとき用に、よかったら」くらいで、食べるかは任せる。</p>
-    <p>持ってきた食べ物は園内で食べず、パーク外の<a href="https://www.tokyodisneyresort.jp/tds/service/detail/051.html" target="_blank" rel="noopener">ピクニックエリア</a>で。早朝に使えるかは現地のキャストに確認。</p>
-    <p class="note">舞浜駅のNewDaysは6:30開店、BECK'Sは7:00開店。5:56着の時点ではどちらも開いていない。</p>
-  </div>
-
-  <h3 class="sub-h">フードスーベニアのメモ</h3>
-  <div class="box">
-    <p><b>グミケース</b>（ピンクのリボン持ち、各1,500円）2個：グミとケースのセット注文。1回の会計で1人1つなので二人で各1個。</p>
-    <p><b>カップ</b>（対象メニュー＋900円）1個：ザンビーニならストロベリーケーキカップに追加。</p>
-    <p><b>タンブラー</b>（対象ドリンク＋1,800円）1個：ザンビーニならキウイ＆ライムのスペシャルスパークリングドリンク、カスバならスペシャルラッシーに追加。</p>
-    <p class="note">在庫保証ではない。ミゲルズ・エルドラド・キャンティーナは11/3〜12休止で候補外。<a href="https://www.tokyodisneyresort.jp/food/5061/" target="_blank" rel="noopener">グミ</a>・<a href="https://www.tokyodisneyresort.jp/food/5057/" target="_blank" rel="noopener">カップ</a>・<a href="https://www.tokyodisneyresort.jp/food/5063/" target="_blank" rel="noopener">タンブラー</a>の公式取扱店</p>
-  </div>
-</section>
-
-<section id="shop">
-  <h2>買い物 <small>チェックはこの端末に保存</small></h2>
-  <div class="rules">
-    <p><b>同じ商品は1人1点。</b>2個欲しい物は二人で各1個ずつ。</p>
-    <p>ショップ3店（マクダックス／アーント・ペグズ／ガッレリーア）を通じて<b>1日1回の会計</b>。全部選んでからレジへ。</p>
-    <p>買う人それぞれの入園済みチケットで認証。スタンバイパスは取り置きではない。</p>
-    <p>アプリ注文も各自のアカウントで。1人のカートにまとめない。</p>
-  </div>
-  <ul class="checks" id="checks">
-    <li class="group-h">ショップ（スタンバイパス）</li>
-    <li><label><input type="checkbox" id="c-charm-d"><span>雪だるま風チャーム ダッフィー<small>2,300円・二人で各1</small></span><span class="qty">×2</span></label></li>
-    <li><label><input type="checkbox" id="c-charm-s"><span>雪だるま風チャーム シェリーメイ<small>2,300円・担当は未定</small></span><span class="qty">×1</span></label></li>
-    <li><label><input type="checkbox" id="c-charm-l"><span>雪だるま風チャーム リーナ・ベル<small>2,300円・ラベンダーのマフラー</small></span><span class="qty">×2</span></label></li>
-    <li><label><input type="checkbox" id="c-figure"><span>雪だるま風フィギュア 単品<small>1,500円・ランダム。通販はBOXのみ</small></span><span class="qty">×2</span></label></li>
-    <li><label><input type="checkbox" id="c-mug"><span>耐熱ガラスマグ<small>2,600円・担当は未定</small></span><span class="qty">×1</span></label></li>
-    <li><label><input type="checkbox" id="c-cap"><span>リーナ・ベル ファンキャップ<small>3,500円・当日かぶるなら店頭</small></span><span class="qty">×2</span></label></li>
-    <li class="group-h">アプリ（入園後・後日配送）</li>
-    <li><label><input type="checkbox" id="c-badge"><span>リーナ・ベル クリスマス衣装のぬいぐるみバッジ<small>3,500円・アプリのみ。個数は仮、最終確認</small></span><span class="qty">×2</span></label></li>
-    <li class="group-h">飲食店（<a href="#food">フード</a>）</li>
-    <li><label><input type="checkbox" id="c-gummy"><span>リルリンリン グミ付きミニスナックケース（ピンク）<small>1,500円</small></span><span class="qty">×2</span></label></li>
-    <li><label><input type="checkbox" id="c-cup"><span>リルリンリン スーベニアカップ<small>対象メニュー＋900円</small></span><span class="qty">×1</span></label></li>
-    <li><label><input type="checkbox" id="c-tumbler"><span>リルリンリン スーベニアタンブラー<small>対象ドリンク＋1,800円</small></span><span class="qty">×1</span></label></li>
-    <li class="group-h">ポップコーンワゴン</li>
-    <li><label><input type="checkbox" id="c-bucket"><span>リルリンリン ポップコーンバケット<small>3,800円・1会計1人1個</small></span><span class="qty">×2</span></label></li>
-  </ul>
-  <h3 class="sub-h">対象ショップ（どれか1店で1回）</h3>
-  <div class="places" data-places="mcduck:マクダックス・デパートメントストア:アメリカンウォーターフロント|auntpeg:アーント・ペグズ・ヴィレッジストア:アメリカンウォーターフロント・ケープコッド|galleria:ガッレリーア・ディズニー:メディテレーニアンハーバー"></div>
-  <h3 class="sub-h">バケットのワゴン（6か所）</h3>
-  <div class="places" data-places="pc-dockside:ドックサイドステージ前:アメリカンウォーターフロント|pc-liberty:リバティ・ランディング・ダイナー前:アメリカンウォーターフロント|pc-lido:リドアイル前:アメリカンウォーターフロント|pc-horizon:ホライズンベイ・レストラン横:ポートディスカバリー|pc-soaring:ソアリン前:メディテレーニアンハーバー|pc-tink:ティンカーベルのビジーバギー前:ファンタジースプリングス"></div>
-  <p class="note">ワゴンはスタンバイパス不要。列が短いところを選ぶ。<a href="https://www.tokyodisneyresort.jp/food/5066/" target="_blank" rel="noopener">公式の販売場所</a></p>
-  <p class="note">ダッフィー冬商品は11/2発売。リルリンリンの一般グッズは11/10発売なので、11/4にはまだ無い。</p>
-</section>
-
 <section id="prep">
   <h2>準備 <small>前日11/3に</small></h2>
   <ul class="checks">
@@ -436,31 +425,12 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   </ul>
   <div class="box">
     <p><b>11/4のパーク</b>：9:00〜21:00。一般入園は早まることがある（<a href="#day">開園時間</a>）。ビリーヴ！19:15予定（今回は見ない）。</p>
-    <p><b>休止</b>：タワー・オブ・テラー（11/5まで）、インディ・ジョーンズ、マーメイドラグーンシアター、トランジットスチーマーのハーバー発着。アクアトピアは営業終了。</p>
+    <p><b>休止</b>：タワー・オブ・テラー、インディ・ジョーンズなど。<a href="#closed">お休み一覧</a>を見る。</p>
     <p><b>雨なら</b>：マーメイドラグーンの屋内側などへ。</p>
     <p class="note"><a href="https://www.tokyodisneyresort.jp/tds/daily/calendar/20261104" target="_blank" rel="noopener">11/4の公式カレンダー</a>・<a href="https://www.tokyodisneyresort.jp/tds/monthly/stop.html" target="_blank" rel="noopener">休止情報</a></p>
   </div>
 </section>
 
-<section id="rides">
-  <h2>体験候補 <small>本命は1つ</small></h2>
-  <div class="tbl">
-    <table>
-      <thead><tr><th>候補</th><th>どんなもの</th><th>メモ</th></tr></thead>
-      <tbody>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/256/" target="_blank" rel="noopener">ラプンツェル</a></td><td>約5分のボート、ランタンの場面</td><td>仮の本命。DPA 2,000円</td></tr>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/219/" target="_blank" rel="noopener">ソアリン</a></td><td>世界を巡る飛行体験</td><td>酔いやすさは別。DPA 2,500円</td></tr>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/255/" target="_blank" rel="noopener">アナとエルサ</a></td><td>音楽のボート、スリルあり</td><td>DPA 2,500円</td></tr>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/257/" target="_blank" rel="noopener">ピーターパン</a></td><td>3Dゴーグル、回転あり</td><td>映像酔いが苦手なら外す。DPA 2,000円</td></tr>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/218/" target="_blank" rel="noopener">トイ・ストーリー・マニア！</a></td><td>3Dシューティング</td><td>ゲームの話題に。DPA 2,000円</td></tr>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/235/" target="_blank" rel="noopener">シンドバッド</a></td><td>約10分、屋内の船旅</td><td>午後の戻り道に</td></tr>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/246/" target="_blank" rel="noopener">タートル・トーク</a></td><td>約30分、クラッシュと会話</td><td>座って笑える</td></tr>
-        <tr><td><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/230/" target="_blank" rel="noopener">ゴンドラ</a></td><td>運河を約11分30秒</td><td>空いていれば。天候で休止あり</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="note">DPAは有料・未購入。二人分を勝手に買わない。一人で乗るのが不安と聞いているので、一緒に体験できる形を優先。</p>
-</section>
 
 <footer class="wrap">
   <p>元にしたメモ：care-sim のシー事前調査ノートとLINEノート転記用テキスト（11/2確認）。</p>
@@ -476,27 +446,26 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   var R = "https://www.tokyodisneyresort.jp/tds/restaurant/";
   var SHOPS = [
     { id: "zambini", img: "map-zambini.jpg", name: "ザンビーニ・ブラザーズ・リストランテ", use: "ランチ第一候補", area: "harbor", areaName: "メディテレーニアンハーバー（入口側）", open: "9:00", close: "21:00",
-      genre: "パスタ・ピッツァ", menu: "ミートボール・スパゲッティ 1,200円／マルゲリータ 750円／スペシャルセット 2,050円", order: "カウンター／MO", mo: true, sv: ["gummy","cup","tumbler"], code: 403, top: true, kw: "イタリアン パスタ ピザ ピッツァ" },
+      genre: "パスタ・ピッツァ", menu: "ミートボール・スパゲッティ 1,200円／マルゲリータ 750円／スペシャルセット 2,050円", order: "カウンター／MO", mo: true, code: 403, top: true, kw: "イタリアン パスタ ピザ ピッツァ" },
     { id: "nydeli", img: "map-nydeli.jpg", name: "ニューヨーク・デリ", use: "軽食にもランチにも", area: "awf", areaName: "アメリカンウォーターフロント・ニューヨーク", open: "9:00", close: "19:30",
-      genre: "サンドイッチ", menu: "ルーベン・ホットサンド 1,180円（セット1,720円）／デニッシュサンド 1,090円（セット1,630円）", order: "カウンター／MO", mo: true, sv: ["gummy","cup"], code: 422, snack: true, kw: "サンド ホットサンド 軽食" },
+      genre: "サンドイッチ", menu: "ルーベン・ホットサンド 1,180円（セット1,720円）／デニッシュサンド 1,090円（セット1,630円）", order: "カウンター／MO", mo: true, code: 422, snack: true, kw: "サンド ホットサンド 軽食" },
     { id: "mamma", img: "map-biscotti.jpg", name: "マンマ・ビスコッティーズ・ベーカリー", use: "小腹が空いたとき", area: "harbor", areaName: "メディテレーニアンハーバー（入口側）", open: "9:00", close: "21:00",
-      genre: "パン", menu: "チキンマヨネーズデニッシュ 360円／マイクメロンパン 500円／コーヒー 360円／おすすめセット 1,150円", order: "カウンターのみ（MOなし）", mo: false, sv: ["gummy"], code: 401, snack: true, kw: "パン ベーカリー 軽食 メロンパン コーヒー" },
+      genre: "パン", menu: "チキンマヨネーズデニッシュ 360円／マイクメロンパン 500円／コーヒー 360円／おすすめセット 1,150円", order: "カウンターのみ（MOなし）", mo: false, code: 401, snack: true, kw: "パン ベーカリー 軽食 メロンパン コーヒー" },
     { id: "cookoff", img: "map-cookoff.jpg", name: "ケープコッド・クックオフ", use: "アーント・ペグズの買い物と合わせて", area: "awf", areaName: "アメリカンウォーターフロント・ケープコッド", open: "9:30", close: "19:15",
-      genre: "ハンバーガー", menu: "ベーコンエッグバーガーのセット 1,440円／ファーストプライズセット 1,490円", order: "カウンター／MO（ショーダイニングは別・予約制）", mo: true, sv: [], code: 446, kw: "バーガー ハンバーガー" },
+      genre: "ハンバーガー", menu: "ベーコンエッグバーガーのセット 1,440円／ファーストプライズセット 1,490円", order: "カウンター／MO（ショーダイニングは別・予約制）", mo: true, code: 446, kw: "バーガー ハンバーガー" },
     { id: "yucatan", img: "map-yucatan.jpg", name: "ユカタン・ベースキャンプ・グリル", use: "奥側でご飯もの", area: "back", areaName: "ロストリバーデルタ", open: "10:00", close: "19:30",
-      genre: "ライスボウル", menu: "ユカタンライスボウル（ハッシュドビーフ・骨付きチキン・ベーコン・エッグ）1,300円（セット1,580円）", order: "カウンター／MO（別のテイクアウト店と間違えない）", mo: true, sv: ["cup","tumbler"], code: 459, kw: "ご飯 ライス チキン" },
+      genre: "ライスボウル", menu: "ユカタンライスボウル（ハッシュドビーフ・骨付きチキン・ベーコン・エッグ）1,300円（セット1,580円）", order: "カウンター／MO（別のテイクアウト店と間違えない）", mo: true, code: 459, kw: "ご飯 ライス チキン" },
     { id: "kasbah", img: "map-casbah.jpg", name: "カスバ・フードコート", use: "カレー・奥側で3種類", area: "back", areaName: "アラビアンコースト", open: "10:00", close: "19:30",
-      genre: "カレー", menu: "チキンカリー（甘口）950円／ビーフカリー（中辛）1,200円／コンビカリー・ナン添え 1,550円", order: "カウンター／MO", mo: true, sv: ["gummy","cup","tumbler"], code: 463, kw: "カレー カリー ナン ご飯 ラッシー" },
+      genre: "カレー", menu: "チキンカリー（甘口）950円／ビーフカリー（中辛）1,200円／コンビカリー・ナン添え 1,550円", order: "カウンター／MO", mo: true, code: 463, kw: "カレー カリー ナン ご飯 ラッシー" },
     { id: "volcania", img: "map-vulcania.jpg", name: "ヴォルケイニア・レストラン", use: "中華が食べたい", area: "back", areaName: "ミステリアスアイランド", open: "10:00", close: "19:45",
-      genre: "中華", menu: "チャーシューと玉子のチャーハン 980円／マーボー豆腐のあんかけチャーハン 1,280円／ヴォルケイニアセット 2,380円", order: "トレーで取って会計（MOなし）", mo: false, sv: ["cup"], code: 418, kw: "中華 チャーハン 麻婆 マーボー ご飯" },
+      genre: "中華", menu: "チャーシューと玉子のチャーハン 980円／マーボー豆腐のあんかけチャーハン 1,280円／ヴォルケイニアセット 2,380円", order: "トレーで取って会計（MOなし）", mo: false, code: 418, kw: "中華 チャーハン 麻婆 マーボー ご飯" },
     { id: "snuggly", img: "map-snuggly.jpg", name: "スナグリーダックリング", use: "FSにいるとき", area: "fs", areaName: "ファンタジースプリングス", open: "10:00", close: "20:00",
-      genre: "ハンバーガー", menu: "ダックリングドリームチーズバーガー 950円（セット1,490円）", order: "MOのみ。入園後に受付状況を確認", mo: true, sv: ["gummy"], code: 413, kw: "バーガー ハンバーガー ラプンツェル" },
+      genre: "ハンバーガー", menu: "ダックリングドリームチーズバーガー 950円（セット1,490円）", order: "MOのみ。入園後に受付状況を確認", mo: true, code: 413, kw: "バーガー ハンバーガー ラプンツェル" },
     { id: "canaletto", img: "map-canaletto.jpg", name: "リストランテ・ディ・カナレット", use: "座ってゆっくり（テーブルサービス）", area: "harbor", areaName: "メディテレーニアンハーバーの運河沿い", open: null, close: null,
-      genre: "イタリア料理", menu: "メニューと価格は公式ページで。高めのコース前提にはしない", order: "テーブルサービス／PS対象（当日オンライン枠は9:00から）", mo: false, sv: [], code: 408, kw: "イタリアン パスタ 座る テーブル 予約" },
+      genre: "イタリア料理", menu: "メニューと価格は公式ページで。高めのコース前提にはしない", order: "テーブルサービス／PS対象（当日オンライン枠は9:00から）", mo: false, code: 408, kw: "イタリアン パスタ 座る テーブル 予約" },
     { id: "sakura", img: "map-sakura.jpg", name: "レストラン櫻", use: "和食が食べたい（テーブルサービス）", area: "awf", areaName: "アメリカンウォーターフロント", open: null, close: null,
-      genre: "和食", menu: "メニューと価格は公式ページで", order: "テーブルサービス／PS対象", mo: false, sv: [], code: 432, kw: "和食 座る テーブル 予約" }
+      genre: "和食", menu: "メニューと価格は公式ページで", order: "テーブルサービス／PS対象", mo: false, code: 432, kw: "和食 座る テーブル 予約" }
   ];
-  var SV = { gummy: "グミケース", cup: "カップ", tumbler: "タンブラー" };
 
   function mins(t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; }
   function jstNow() {
@@ -514,21 +483,19 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   function isOpen(s, now) { return s.open && now.m >= mins(s.open) && now.m < mins(s.close); }
 
   var state = { area: "all", flags: {}, q: "", pick: null };
-  try { var saved = JSON.parse(localStorage.getItem("food-filter") || "null"); if (saved) { state.area = saved.area || "all"; state.flags = saved.flags || {}; } } catch (e) {}
+  try { var saved = JSON.parse(localStorage.getItem("food-filter") || "null"); if (saved) { state.area = saved.area || "all"; state.flags = { open: !!(saved.flags && saved.flags.open), mo: !!(saved.flags && saved.flags.mo) }; } } catch (e) {}
 
   var list = document.getElementById("shops");
   var countEl = document.getElementById("food-count");
 
   function card(s, now) {
     var st = status(s, now);
-    var sv = s.sv.map(function (k) { return '<span class="tag sv">' + SV[k] + "</span>"; }).join("");
-    if (!s.sv.length) sv = '<span class="tag">希望スーベニアなし</span>';
     var hours = s.open ? s.open + "〜" + s.close : "公式・アプリで確認";
     return '<article class="shop' + (s.top ? " top-pick" : "") + '" id="shop-' + s.id + '">' +
       '<header><div><p class="use">' + s.use + "</p><h3>" + s.name + '</h3><p class="area">' + s.areaName + "</p></div>" +
       '<span class="status ' + st.cls + '">' + st.text + "</span></header>" +
       '<dl class="facts num"><dt>時間</dt><dd>' + hours + "</dd><dt>料理</dt><dd>" + s.genre + "</dd><dt>例</dt><dd>" + s.menu + "</dd><dt>注文</dt><dd>" + s.order + "</dd></dl>" +
-      '<div class="tags">' + (s.mo ? '<span class="tag mo">MO</span>' : "") + sv + "</div>" +
+      (s.mo ? '<div class="tags"><span class="tag mo">MO</span></div>' : "") +
       '<button type="button" class="map-btn" data-zoom="img/' + s.img + '" aria-label="' + s.name + 'の地図を拡大">' +
       '<img src="img/' + s.img + '" alt="' + s.name + 'の場所（公式マップ）" width="800" height="450" loading="lazy"><span>タップで拡大</span></button>' +
       '<p class="links"><a href="' + R + "food/" + s.code + '/" target="_blank" rel="noopener">メニュー（公式）</a>' +
@@ -539,7 +506,6 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     if (state.pick) {
       var p = state.pick;
       if (p === "back") return s.area === "back" && (s.id === "yucatan" || s.id === "kasbah");
-      if (p === "sv3") return s.id === "zambini" || s.id === "kasbah";
       if (p === "snack") return !!s.snack;
       return s.id === p;
     }
@@ -547,9 +513,6 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     var f = state.flags;
     if (f.open && !isOpen(s, now)) return false;
     if (f.mo && !s.mo) return false;
-    if (f.gummy && s.sv.indexOf("gummy") < 0) return false;
-    if (f.cup && s.sv.indexOf("cup") < 0) return false;
-    if (f.tumbler && s.sv.indexOf("tumbler") < 0) return false;
     if (state.q) {
       var hay = (s.name + s.use + s.areaName + s.genre + s.menu + s.kw).toLowerCase();
       if (hay.indexOf(state.q.toLowerCase()) < 0) return false;
@@ -580,6 +543,26 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       render(); list.scrollIntoView({ block: "start" });
     });
   });
+
+  // アトラクション
+  var ATTR = [
+    { img: "rapunzel", code: 256, name: "ラプンツェルのランタンフェスティバル", area: "ファンタジースプリングス", use: "仮の本命", what: "約5分のボートライド。ランタンの場面", note: "物語と景色をゆっくり楽しむ。二人の希望が別ならそちらに", dpa: "2,000円" },
+    { img: "soarin", code: 219, name: "ソアリン：ファンタスティック・フライト", area: "メディテレーニアンハーバー", use: "景色を楽しむ", what: "世界を巡る飛行体験", note: "高所や乗り物酔いの利用制限あり。絶叫が平気でも酔いは別", dpa: "2,500円" },
+    { img: "frozen", code: 255, name: "アナとエルサのフローズンジャーニー", area: "ファンタジースプリングス", use: "映画が好きなら", what: "音楽と物語のボートライド。スピード・スリルあり", note: "ボートだから穏やか、とは限らない", dpa: "2,500円" },
+    { img: "peterpan", code: 257, name: "ピーターパンのネバーランドアドベンチャー", area: "ファンタジースプリングス", use: "FSでもう1つ", what: "ゴーグルを使う3D体験。回転あり", note: "映像酔いが苦手なら外す", dpa: "2,000円" },
+    { img: "toymania", code: 218, name: "トイ・ストーリー・マニア！", area: "アメリカンウォーターフロント", use: "ゲームの話題に", what: "3Dのシューティング。回転あり", note: "点数を競えて盛り上がる", dpa: "2,000円" },
+    { img: "sindbad", code: 235, name: "シンドバッド・ストーリーブック・ヴォヤッジ", area: "アラビアンコースト", use: "午後の戻り道", what: "約10分の屋内の船旅", note: "座って進むので歩き疲れたときにも", dpa: null },
+    { img: "turtle", code: 246, name: "タートル・トーク", area: "アメリカンウォーターフロント", use: "座って笑える", what: "約30分のシアター。クラッシュとおしゃべり", note: "指名されたくなければキャストに相談できる", dpa: null },
+    { img: "gondola", code: 230, name: "ヴェネツィアン・ゴンドラ", area: "メディテレーニアンハーバー", use: "空いていれば", what: "運河の遊覧、約11分30秒", note: "天候やショーで一時休止あり。夕方は確約しない", dpa: null }
+  ];
+  document.getElementById("attrs").innerHTML = ATTR.map(function (a) {
+    return '<article class="shop"><header><div><p class="use">' + a.use + "</p><h3>" + a.name + '</h3><p class="area">' + a.area + "</p></div>" +
+      '<span class="dpa">' + (a.dpa ? "DPA " + a.dpa : "DPAなし") + "</span></header>" +
+      '<dl class="facts"><dt>内容</dt><dd>' + a.what + "</dd><dt>メモ</dt><dd>" + a.note + "</dd></dl>" +
+      '<button type="button" class="map-btn" data-zoom="img/at-' + a.img + '.jpg" aria-label="' + a.name + 'の地図を拡大">' +
+      '<img src="img/at-' + a.img + '.jpg" alt="' + a.name + 'の場所（公式マップ）" width="800" height="450" loading="lazy"><span>タップで拡大</span></button>' +
+      '<p class="links"><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/' + a.code + '/" target="_blank" rel="noopener">公式ページ</a></p></article>';
+  }).join("");
 
   // いまの時間帯（11/4当日だけ行程を光らせる）
   function updateNow() {
@@ -626,7 +609,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   }, true);
 
   // 地図をページ内で拡大
-  var PINS = {"auntpeg":[420,60],"biscotti":[500,380],"canaletto":[220,380],"casbah":[660,220],"cookoff":[460,60],"galleria":[340,300],"mcduck":[380,140],"nydeli":[460,340],"pc-dockside":[340,180],"pc-horizon":[340,220],"pc-liberty":[340,220],"pc-lido":[220,100],"pc-soaring":[460,180],"pc-tink":[420,220],"sakura":[380,260],"snuggly":[460,260],"vulcania":[500,220],"yucatan":[500,140],"zambini":[580,220]};
+  var PINS = {"auntpeg":[420,60],"biscotti":[500,380],"canaletto":[220,380],"casbah":[660,220],"cookoff":[460,60],"galleria":[340,300],"mcduck":[380,140],"nydeli":[460,340],"pc-dockside":[340,180],"pc-horizon":[340,220],"pc-liberty":[340,220],"pc-lido":[220,100],"pc-soaring":[460,180],"pc-tink":[420,220],"sakura":[380,260],"snuggly":[460,260],"vulcania":[500,220],"yucatan":[500,140],"zambini":[580,220],"at-rapunzel":[380,300],"at-soarin":[500,180],"at-frozen":[580,260],"at-peterpan":[300,220],"at-toymania":[260,340],"at-sindbad":[700,180],"at-turtle":[140,180],"at-gondola":[260,300]};
   var zoom = null;
   function closeZoom() { if (zoom) { zoom.remove(); zoom = null; document.body.style.overflow = ""; } }
   document.addEventListener("click", function (e) {
@@ -643,7 +626,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     document.body.style.overflow = "hidden";
     var sc = zoom.querySelector(".zoom-scroll");
     // ピン（800×450の元画像上の位置）が画面の真ん中に来るように寄せる
-    var key = b.dataset.zoom.replace(/^img\/map-|\.jpg$/g, ""), pin = PINS[key] || [400, 225];
+    var key = b.dataset.zoom.replace(/^img\/(map-)?|\.jpg$/g, ""), pin = PINS[key] || [400, 225];
     var zimg = zoom.querySelector("img");
     function center() {
       var k = zimg.width / 800;
@@ -676,6 +659,28 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   shin.addEventListener("input", calc);
   extra.addEventListener("change", calc);
   calc();
+
+  // 章ナビ：いま見ている章だけ塗る
+  var navLinks = [].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var navWrap = document.querySelector(".nav .wrap");
+  function spy() {
+    var line = 80, cur = null;
+    navLinks.forEach(function (a) {
+      var sec = document.querySelector(a.getAttribute("href"));
+      if (sec && sec.getBoundingClientRect().top - line <= 0) cur = a;
+    });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = navLinks[navLinks.length - 1];
+    navLinks.forEach(function (a) {
+      if (a === cur) {
+        if (a.getAttribute("aria-current") !== "true") {
+          a.setAttribute("aria-current", "true");
+          navWrap.scrollTo({ left: a.offsetLeft - 16, behavior: "smooth" });
+        }
+      } else a.removeAttribute("aria-current");
+    });
+  }
+  window.addEventListener("scroll", spy, { passive: true });
+  spy();
 
   updateNow();
   setInterval(updateNow, 60000);
