@@ -296,9 +296,9 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   <ul class="checks">
     <li><label><input type="checkbox" id="i-phone"><span>スマホ（チケット・アプリ）<small>入園、ショップのパス、アプリ注文、MO、DPAが全部アプリ。ログインと二人のチケット共有は前日に</small></span><span></span></label></li>
     <li><label><input type="checkbox" id="i-battery"><span>モバイルバッテリー＋ケーブル<small>5時台から18時すぎまでアプリを使い続ける。帰りの検索や新幹線の時刻確認にも</small></span><span></span></label></li>
-    <li><label><input type="checkbox" id="i-ic"><span>Suica・PASMO（残高多め）<small>片道1,058円（TX・JR・モノレール）＋帰り分。舞浜は乗り換え7分なので券売機に寄れない</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-ic"><span>Suica・PASMO（<b>2,500円以上</b>）<small>おおたかの森⇔シーの往復で2,116円（片道1,058円＝TX 230円＋JR 528円＋モノレール 300円）。電車とモノレールだけに使う前提で、少し余裕をみて2,500〜3,000円。舞浜は乗り換え7分でチャージに寄れないので前日までに</small></span><span></span></label></li>
     <li><label><input type="checkbox" id="i-pay"><span>支払い手段（アプリに登録したカードなど）<small>パス後の会計、アプリ注文、モバイルオーダー、DPA</small></span><span></span></label></li>
-    <li><label><input type="checkbox" id="i-rain"><span>雨具（折りたたみ傘かレインコート）<small>気象庁は「くもり 後 一時 雨」、降水確率70%（11/2時点）。夕方〜帰り道が怪しい</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-rain"><span>折りたたみ傘<small>気象庁は「くもり 後 一時 雨」、降水確率70%（11/2時点）。夕方〜帰り道が怪しい</small></span><span></span></label></li>
     <li><label><input type="checkbox" id="i-jacket"><span>脱ぎ着できる上着<small>朝6時台は13°前後（体感11°くらい）で、6:20から外で待つ。日中も16°くらいまで</small></span><span></span></label></li>
     <li><label><input type="checkbox" id="i-shoes"><span>歩き慣れた靴<small>早朝の待機から18時まで立つ・歩くがずっと続く。雨でも滑りにくいもの</small></span><span></span></label></li>
   </ul>
@@ -309,6 +309,15 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <li><label><input type="checkbox" id="i-cash"><span>現金を少し<small>タクシーにする場合（1,000〜1,500円くらい）や、カードが使えないときの予備</small></span><span></span></label></li>
     <li><label><input type="checkbox" id="i-bag"><span>大きめの袋・エコバッグ<small>買ったものや脱いだ上着を入れる。濡れた傘用のビニール袋も</small></span><span></span></label></li>
     <li><label><input type="checkbox" id="i-towel"><span>タオル・ハンカチ<small>雨や手洗い用</small></span><span></span></label></li>
+  </ul>
+  <p class="group-h">身だしなみ</p>
+  <ul class="checks">
+    <li><label><input type="checkbox" id="i-tab"><span>歯みがきタブレット（無印）<small>食後に</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-floss"><span>糸ようじ</span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-wet"><span>ウェットティッシュ</span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-shaver"><span>携帯ひげそり</span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-makeup"><span>メイク直し道具</span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-lip"><span>リップ類</span><span></span></label></li>
   </ul>
   <p class="note">雨と気温は11/2時点の予報から。前日に<a href="#weather">天気</a>を見直す。</p>
 </section>
@@ -590,7 +599,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   <ul class="checks">
     <li><label><input type="checkbox" id="p-app"><span>アプリのログインと、二人のチケットのグループ共有</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-pay"><span>決済方法の登録、希望商品のお気に入り登録</span><span></span></label></li>
-    <li><label><input type="checkbox" id="p-ic"><span>Suica・PASMOの残高</span><span></span></label></li>
+    <li><label><input type="checkbox" id="p-ic"><span>Suica・PASMOに2,500円以上チャージ（往復2,116円）</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-items"><span><a href="#items">持ち物</a>をそろえる。スマホとモバイルバッテリーは充電しておく</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-train"><span>新幹線の乗車駅・発車時刻が分かったら、<a href="#home">帰り</a>で退園時刻を決める</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-weather"><span><a href="#weather">天気予報</a>と電車の運行情報を見る</span><span></span></label></li>
