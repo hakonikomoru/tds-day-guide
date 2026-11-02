@@ -199,6 +199,16 @@ details.mapbox[open] > summary::after { content: "▴"; }
 details.mapbox[open] > summary { margin-bottom: 8px; }
 .empty { padding: 14px; text-align: center; color: var(--muted); }
 .sub-h { font-size: 16px; font-weight: 700; margin-top: 6px; }
+.trains { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.trains button { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: grid; grid-template-columns: 58px 1fr auto; gap: 4px 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; }
+.trains button:focus-visible { outline: 2px solid var(--accent); }
+.trains button[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); background: var(--accent-soft); }
+.trains .t-dep { font-weight: 700; font-size: 18px; font-family: var(--font-display); }
+.trains .t-name { min-width: 0; font-size: 14px; font-weight: 700; }
+.trains .t-name small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); }
+.trains .t-leave { text-align: right; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.trains .t-leave b { display: block; font-size: 15px; color: var(--ink); }
+.trains .t-tag { display: inline-block; font-size: 11px; padding: 0 6px; margin-left: 4px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); font-weight: 700; vertical-align: 1px; }
 .box { background: var(--surface); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; }
 
 /* 買い物 */
@@ -346,7 +356,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <li class="slot" data-from="15:00" data-to="16:15"><time>15:00〜16:15</time><div class="body"><p class="what">戻りながらもう1つ</p><p class="detail">シンドバッドなど。買い物が残っていればそちら優先、ライドは減らす。</p></div></li>
     <li class="slot meal" data-from="16:15" data-to="17:15"><time>16:15〜17:15</time><div class="body"><p class="what">ハーバーで景色・写真・<a href="#food">軽食</a></p><p class="detail">出口に近いエリアへ戻る。</p></div></li>
     <li class="slot" data-from="17:15" data-to="18:00"><time>17:15〜17:45</time><div class="body"><p class="what">トイレ・荷物・出口へ</p><p class="detail">買えたもの・通販注文・持ち物を確認。長い列には新しく並ばない。退園を早めるならここも前倒し。</p></div></li>
-    <li class="slot" data-from="18:00" data-to="19:00"><time>18:00ごろ</time><div class="body"><p class="what"><a href="#home">退園（仮の目安）</a></p><p class="detail">新幹線の時刻しだいで早める。退園後は宿泊先で荷物回収 → 新幹線へ。19:15のビリーヴ！は入れない。</p></div></li>
+    <li class="slot" data-from="18:00" data-to="19:00"><time>18:00ごろ</time><div class="body"><p class="what"><a href="#home">退園（仮の目安）</a></p><p class="detail">乗る新幹線しだいで早める（+60分なら20:08発→17:38、20:44発→18:14）。退園後は宿泊先で荷物回収 → 新幹線へ。19:15のビリーヴ！は入れない。</p></div></li>
   </ol>
 
   <h3 class="sub-h">開園時間</h3>
@@ -442,12 +452,22 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
 
 <section id="home">
   <h2>帰り <small>荷物回収と新幹線</small></h2>
-  <p>順番は <b>退園 → 宿泊先で荷物回収 → JR駅 → 東京駅 → 新幹線</b>。18:00退園は仮の目安で、新幹線の時刻が分かったら逆算して早める。東京駅から乗るのは見込みで、駅・列車・時刻はまだ未確認。</p>
+  <p>順番は <b>退園 → 宿泊先で荷物回収 → JR駅 → 東京駅 → 新幹線</b>。18:00退園は仮の目安で、乗る列車が決まったら逆算して早める。東京駅から乗るのは見込みで、列車はまだ予約していない。</p>
+
+  <h3 class="sub-h">11/4 東京駅18時以降の新幹線（直通の全9便）</h3>
+  <p class="note">押すと下の計算にその発車時刻が入る。右は退園の目安（下で選んだ荷物回収の時間で計算）。空席は未確認。</p>
+  <ul class="trains num" id="trains"></ul>
+  <ul class="plain-list">
+    <li>東北・山形新幹線は<b>20〜23番線</b>。東海道新幹線の改札へ行かないように。</li>
+    <li>行先が「仙台行」「盛岡行」「山形行」「新庄行」でも、号数が合っていればこの列車。つばさは全車指定席。</li>
+    <li>時刻表にある 18:48発195号・19:08発489号・21:12発443号は<b>11/4は走らない</b>。</li>
+    <li>上野は東京の6分後、大宮は25分後に出るが、そこまでの移動が増えるので退園をそのぶん遅らせられるわけではない。</li>
+  </ul>
 
   <div class="calc">
     <label for="shinkansen">新幹線の発車時刻</label>
     <div class="calc-row">
-      <input type="time" id="shinkansen" value="20:30" step="300">
+      <input type="time" id="shinkansen" value="20:44" step="60">
       <select id="extra" aria-label="荷物回収で増える時間">
         <option value="30">荷物回収 +30分</option>
         <option value="45">荷物回収 +45分</option>
@@ -456,7 +476,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       </select>
     </div>
     <dl class="calc-out num" id="calc-out"></dl>
-    <p class="note">シーから東京駅へ直行で約90分の枠＋荷物回収で増える時間、で逆算した仮の配分。時刻表の値ではない。例：+60分なら 20:00発→17:30退園、20:30発→18:00退園。</p>
+    <p class="note">シーから東京駅へ直行で約90分の枠＋荷物回収で増える時間、で逆算した仮の配分。時刻表の値ではない。例：+60分なら 20:08発→17:38退園、20:44発→18:14退園。</p>
   </div>
 
   <ul class="plain-list">
@@ -791,9 +811,45 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       '<dt>退園の目安</dt><dd class="key">' + fmt(leave) + "</dd>" +
       "<dt>出口へ向かう</dt><dd>" + fmt(leave - 45) + "ごろから（トイレ・荷物）</dd>" +
       "<dt>京葉線ホーム着</dt><dd>" + fmt(dep - 40) + "〜" + fmt(dep - 30) + "</dd>" +
-      "<dt>新幹線</dt><dd>" + fmt(dep) + " 発</dd>";
+      "<dt>新幹線</dt><dd>" + fmt(dep) + " 発" + trainName(shin.value) + "</dd>";
     try { localStorage.setItem("home-calc", JSON.stringify({ t: shin.value, x: extra.value })); } catch (e) {}
+    renderTrains();
   }
+  // 11/4運転の東京発・福島まで直通の便（notes【10】、JR東日本の時刻表で確認）
+  var TRAINS = [
+    { t: "18:00", n: "やまびこ・つばさ153号", u: "18:06", o: "18:25" },
+    { t: "18:28", n: "やまびこ155号", u: "18:34", o: "18:53" },
+    { t: "18:36", n: "やまびこ217号", u: "18:42", o: "19:01" },
+    { t: "19:16", n: "やまびこ・つばさ157号", u: "19:22", o: "19:41" },
+    { t: "19:28", n: "やまびこ219号", u: "19:34", o: "19:53" },
+    { t: "20:08", n: "やまびこ69号", u: "20:14", o: "20:33" },
+    { t: "20:44", n: "やまびこ・つばさ159号", u: "20:50", o: "21:09" },
+    { t: "20:56", n: "やまびこ221号", u: "21:02", o: "21:21" },
+    { t: "21:24", n: "やまびこ223号", u: "21:30", o: "21:49", last: true }
+  ];
+  var trainList = document.getElementById("trains");
+  function trainName(t) {
+    for (var i = 0; i < TRAINS.length; i++) if (TRAINS[i].t === t) return "（" + TRAINS[i].n + (TRAINS[i].last ? "・直通の最終" : "") + "）";
+    return "";
+  }
+  function renderTrains() {
+    var x = +extra.value, cur = shin.value;
+    trainList.innerHTML = TRAINS.map(function (tr) {
+      var leave = mins(tr.t) - 90 - x;
+      return '<li><button type="button" data-t="' + tr.t + '" aria-pressed="' + (cur === tr.t) + '">' +
+        '<span class="t-dep">' + tr.t + '</span>' +
+        '<span class="t-name">' + tr.n + (tr.last ? '<span class="t-tag">最終</span>' : "") +
+        '<small>上野 ' + tr.u + '・大宮 ' + tr.o + ' 発</small></span>' +
+        '<span class="t-leave">退園<b>' + fmt(leave) + '</b></span></button></li>';
+    }).join("");
+  }
+  trainList.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-t]");
+    if (!b) return;
+    shin.value = b.dataset.t;
+    calc();
+    out.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
   shin.addEventListener("input", calc);
   extra.addEventListener("change", calc);
   calc();
