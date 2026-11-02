@@ -177,6 +177,21 @@ details.place .inner { padding-top: 0; }
 .closed li { display: grid; gap: 0; font-size: 14px; }
 .closed li span { font-size: 13px; color: var(--muted); }
 .shop .dpa { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; white-space: nowrap; background: var(--accent-soft); color: var(--accent); }
+.wx { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 12px; }
+.wx-main { display: grid; gap: 4px; }
+.wx-src { font-size: 12px; color: var(--muted); }
+.wx-text { font-family: var(--font-display); font-size: 22px; font-weight: 900; line-height: 1.4; }
+.wx-facts { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 0; font-size: 14px; }
+.wx-facts dt { color: var(--muted); font-size: 12px; padding-top: 2px; }
+.wx-facts dd { margin: 0; font-weight: 700; }
+.wx-tips { display: flex; flex-wrap: wrap; gap: 6px; }
+.wx-tips span { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.wx-tips span.rain { background: var(--warn-soft); color: var(--warn); }
+.wx-hours { min-width: 0; width: max-content; }
+.wx-hours th, .wx-hours td { text-align: center; padding: 6px 7px; white-space: nowrap; }
+.wx-hours th:first-child, .wx-hours td:first-child { text-align: left; color: var(--muted); font-size: 12px; position: sticky; left: 0; background: var(--bg); }
+.wx-hours td.wet { color: var(--warn); font-weight: 700; }
+.wx-hours .plan { background: var(--accent-soft); }
 .empty { padding: 14px; text-align: center; color: var(--muted); }
 .sub-h { font-size: 16px; font-weight: 700; margin-top: 6px; }
 .box { background: var(--surface); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; }
@@ -216,6 +231,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
 <nav class="nav" aria-label="章">
   <div class="wrap">
     <a href="#now">いま</a>
+    <a href="#weather">天気</a>
     <a href="#move">朝の移動</a>
     <a href="#day">1日の流れ</a>
     <a href="#food" class="food-link">フード</a>
@@ -233,6 +249,24 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <b>当日になると、今の時間帯がここに出ます</b>
     <p class="note">1日の流れの該当行も緑で光ります。フードの「営業中」は11/4の営業予定で毎日判定します。</p>
   </div>
+</section>
+
+<section id="weather">
+  <h2>天気 <small>舞浜・11/4</small></h2>
+  <div class="wx" id="wx">
+    <div class="wx-main">
+      <p class="wx-src">気象庁　千葉県北西部の予報</p>
+      <p class="wx-text" id="wx-text">くもり 後 一時 雨</p>
+      <dl class="wx-facts num" id="wx-facts"><dt>降水確率</dt><dd>70%（週間予報）</dd><dt>風</dt><dd>北東の風</dd></dl>
+    </div>
+    <div class="wx-tips" id="wx-tips"></div>
+  </div>
+  <h3 class="sub-h">時間ごと <small class="note">参考・Open-Meteo（気象庁とずれることがある）</small></h3>
+  <div class="tbl">
+    <table class="wx-hours num" id="wx-hours"></table>
+  </div>
+  <p class="note" id="wx-stamp">保存した予報：11/2 16:20ごろ。</p>
+  <p class="note">雨の場合はマーメイドラグーンの屋内側などへ。<a href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=120000" target="_blank" rel="noopener">気象庁の千葉県の予報</a>・<a href="https://www.tokyodisneyresort.jp/tdr/guide/rain.html" target="_blank" rel="noopener">公式の雨の日ガイド</a></p>
 </section>
 
 <section id="move">
@@ -419,7 +453,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <li><label><input type="checkbox" id="p-bag"><span>モバイルバッテリー・上着・雨具・歩き慣れた靴</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-snack"><span>差し入れのパン（するなら）</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-train"><span>新幹線の乗車駅・発車時刻が分かったら、<a href="#home">帰り</a>で退園時刻を決める</span><span></span></label></li>
-    <li><label><input type="checkbox" id="p-weather"><span>天気予報と電車の運行情報を見る</span><span></span></label></li>
+    <li><label><input type="checkbox" id="p-weather"><span><a href="#weather">天気予報</a>と電車の運行情報を見る</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-meet"><span>集合場所・時刻を決める（駅改札外など公共の場所）</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-sleep"><span>早めに寝る</span><span></span></label></li>
   </ul>
@@ -543,6 +577,75 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       render(); list.scrollIntoView({ block: "start" });
     });
   });
+
+  // 天気：開いたときに最新を取りに行き、取れなければ保存した予報（11/2 16:20ごろ）を出す
+  var WX_SNAP = {
+    stamp: "11/2 16:20ごろ",
+    jma: { text: "くもり 後 一時 雨", pop: "70%（週間予報）", wind: "北東の風", report: "11/2 12:00発表" },
+    hours: { t: [13.5,13.3,13.3,13.7,14.3,14.8,15.0,15.3,15.6,15.8,15.8,15.6,15.4,15.3,14.9,14.0], p: [4,4,5,6,6,5,3,2,3,5,6,5,4,4,6,10], mm: [0,0,0,0,0,0,0,0,0,0,0,0,0.1,0,0.1,0.8], c: [1,1,2,2,2,3,3,3,3,3,3,3,51,3,51,53] }
+  };
+  var WX_START = 5; // 5時〜20時
+  function wxWord(c) {
+    if (c <= 1) return "晴れ"; if (c === 2) return "晴/曇"; if (c === 3) return "くもり";
+    if (c === 45 || c === 48) return "霧"; if (c >= 51 && c <= 57) return "小雨"; if (c >= 61 && c <= 67) return "雨";
+    if (c >= 80 && c <= 82) return "にわか雨"; if (c >= 95) return "雷雨"; return "—";
+  }
+  function renderWx(jma, h, stamp) {
+    document.getElementById("wx-text").textContent = jma.text;
+    document.getElementById("wx-facts").innerHTML = "<dt>降水確率</dt><dd>" + jma.pop + "</dd><dt>風</dt><dd>" + jma.wind + "</dd>" + (jma.temp ? "<dt>気温</dt><dd>" + jma.temp + "</dd>" : "") + "<dt>発表</dt><dd>" + jma.report + "</dd>";
+    var rows = { time: "<tr><th>時</th>", c: "<tr><td>天気</td>", t: "<tr><td>気温</td>", p: "<tr><td>降水確率</td>", mm: "<tr><td>雨量</td>" };
+    for (var i = 0; i < h.t.length; i++) {
+      var hr = WX_START + i, plan = hr >= 6 && hr < 18 ? ' class="plan"' : "";
+      var wet = h.p[i] >= 40 || h.mm[i] >= 0.5;
+      rows.time += "<th" + plan + ">" + hr + "</th>";
+      rows.c += "<td" + (h.c[i] >= 51 ? ' class="wet"' : "") + ">" + wxWord(h.c[i]) + "</td>";
+      rows.t += "<td>" + Math.round(h.t[i]) + "°</td>";
+      rows.p += "<td" + (h.p[i] >= 40 ? ' class="wet"' : "") + ">" + h.p[i] + "%</td>";
+      rows.mm += "<td" + (wet ? ' class="wet"' : "") + ">" + (h.mm[i] ? h.mm[i] : "0") + "</td>";
+    }
+    document.getElementById("wx-hours").innerHTML = "<thead>" + rows.time + "</tr></thead><tbody>" + rows.c + "</tr>" + rows.t + "</tr>" + rows.p + "</tr>" + rows.mm + "</tr></tbody>";
+    var tips = [], rainy = /雨/.test(jma.text) || parseInt(jma.pop, 10) >= 50 || h.p.some(function (v) { return v >= 50; });
+    if (rainy) tips.push('<span class="rain">折りたたみ傘・雨具</span>');
+    var lo = Math.min.apply(null, h.t);
+    if (lo < 16) tips.push("<span>朝は" + Math.round(lo) + "°前後、上着</span>");
+    tips.push("<span>日の出 6:04／日の入り 16:42</span>");
+    document.getElementById("wx-tips").innerHTML = tips.join("");
+    document.getElementById("wx-stamp").textContent = stamp;
+  }
+  renderWx(WX_SNAP.jma, WX_SNAP.hours, "保存した予報：" + WX_SNAP.stamp + "。最新が取れないときはこの内容です。");
+
+  function fmtJmaTime(iso) { var d = new Date(iso); return (d.getMonth() + 1) + "/" + d.getDate() + " " + d.getHours() + ":00発表"; }
+  function liveWx() {
+    var day = "2026-11-04";
+    var jmaP = fetch("https://www.jma.go.jp/bosai/forecast/data/forecast/120000.json").then(function (r) { return r.json(); }).then(function (d) {
+      var out = { text: WX_SNAP.jma.text, pop: WX_SNAP.jma.pop, wind: WX_SNAP.jma.wind, report: fmtJmaTime(d[0].reportDatetime) };
+      var ts0 = d[0].timeSeries[0], i0 = ts0.timeDefines.findIndex(function (t) { return t.indexOf(day) === 0; });
+      var a0 = ts0.areas.find(function (a) { return a.area.code === "120010"; });
+      if (i0 >= 0 && a0) { out.text = a0.weathers[i0].replace(/\u3000/g, " "); out.wind = a0.winds[i0].replace(/\u3000/g, " "); }
+      var ts1 = d[0].timeSeries[1], a1 = ts1.areas.find(function (a) { return a.area.code === "120010"; }), pops = [];
+      ts1.timeDefines.forEach(function (t, k) { if (t.indexOf(day) === 0 && a1.pops[k] !== "") pops.push(new Date(t).getHours() + "時〜 " + a1.pops[k] + "%"); });
+      if (pops.length) out.pop = pops.join("／");
+      else {
+        var w = d[1].timeSeries[0], iw = w.timeDefines.findIndex(function (t) { return t.indexOf(day) === 0; });
+        if (iw >= 0 && w.areas[0].pops[iw]) out.pop = w.areas[0].pops[iw] + "%（週間予報）";
+      }
+      var ts2 = d[0].timeSeries[2], a2 = ts2 && ts2.areas.find(function (a) { return a.area.name === "千葉"; }), tt = [];
+      if (a2) ts2.timeDefines.forEach(function (t, k) { if (t.indexOf(day) === 0) tt.push(a2.temps[k]); });
+      if (tt.length === 2) out.temp = "千葉 " + Math.min(+tt[0], +tt[1]) + "〜" + Math.max(+tt[0], +tt[1]) + "°";
+      return out;
+    });
+    var omP = fetch("https://api.open-meteo.com/v1/forecast?latitude=35.6267&longitude=139.8851&hourly=temperature_2m,precipitation_probability,precipitation,weather_code&timezone=Asia%2FTokyo&start_date=" + day + "&end_date=" + day).then(function (r) { return r.json(); }).then(function (d) {
+      var hh = d.hourly, sl = function (arr) { return arr.slice(WX_START, WX_START + 16); };
+      return { t: sl(hh.temperature_2m), p: sl(hh.precipitation_probability), mm: sl(hh.precipitation), c: sl(hh.weather_code) };
+    });
+    Promise.all([jmaP.catch(function () { return null; }), omP.catch(function () { return null; })]).then(function (r) {
+      if (!r[0] && !r[1]) return;
+      var now = new Date(), stamp = "最新の予報を取得：" + (now.getMonth() + 1) + "/" + now.getDate() + " " + now.getHours() + ":" + String(now.getMinutes()).padStart(2, "0");
+      if (!r[0] || !r[1]) stamp += "（" + (r[0] ? "時間ごとは保存した予報" : "気象庁は保存した予報") + "）";
+      renderWx(r[0] || WX_SNAP.jma, r[1] || WX_SNAP.hours, stamp);
+    });
+  }
+  try { liveWx(); } catch (e) {}
 
   // アトラクション
   var ATTR = [
