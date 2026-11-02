@@ -192,6 +192,11 @@ details.place .inner { padding-top: 0; }
 .wx-hours th:first-child, .wx-hours td:first-child { text-align: left; color: var(--muted); font-size: 12px; position: sticky; left: 0; background: var(--bg); }
 .wx-hours td.wet { color: var(--warn); font-weight: 700; }
 .wx-hours .plan { background: var(--accent-soft); }
+details.mapbox { background: transparent; border: 0; border-radius: 0; }
+details.mapbox > summary { padding: 0; justify-content: flex-start; gap: 6px; font-size: 13px; color: var(--accent); }
+details.mapbox > summary::after { content: "▾"; color: var(--accent); }
+details.mapbox[open] > summary::after { content: "▴"; }
+details.mapbox[open] > summary { margin-bottom: 8px; }
 .empty { padding: 14px; text-align: center; color: var(--muted); }
 .sub-h { font-size: 16px; font-weight: 700; margin-top: 6px; }
 .box { background: var(--surface); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; }
@@ -232,6 +237,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   <div class="wrap">
     <a href="#now">いま</a>
     <a href="#weather">天気</a>
+    <a href="#items">持ち物</a>
     <a href="#move">朝の移動</a>
     <a href="#day">1日の流れ</a>
     <a href="#food" class="food-link">フード</a>
@@ -267,6 +273,29 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   </div>
   <p class="note" id="wx-stamp">保存した予報：11/2 16:20ごろ。</p>
   <p class="note">雨の場合はマーメイドラグーンの屋内側などへ。<a href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=120000" target="_blank" rel="noopener">気象庁の千葉県の予報</a>・<a href="https://www.tokyodisneyresort.jp/tdr/guide/rain.html" target="_blank" rel="noopener">公式の雨の日ガイド</a></p>
+</section>
+
+<section id="items">
+  <h2>持ち物 <small>チェックはこの端末に保存</small></h2>
+  <p class="group-h">必須級</p>
+  <ul class="checks">
+    <li><label><input type="checkbox" id="i-phone"><span>スマホ（チケット・アプリ）<small>入園、ショップのパス、アプリ注文、MO、DPAが全部アプリ。ログインと二人のチケット共有は前日に</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-battery"><span>モバイルバッテリー＋ケーブル<small>5時台から18時すぎまでアプリを使い続ける。帰りの検索や新幹線の時刻確認にも</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-ic"><span>Suica・PASMO（残高多め）<small>片道1,058円（TX・JR・モノレール）＋帰り分。舞浜は乗り換え7分なので券売機に寄れない</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-pay"><span>支払い手段（アプリに登録したカードなど）<small>パス後の会計、アプリ注文、モバイルオーダー、DPA</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-rain"><span>雨具（折りたたみ傘かレインコート）<small>気象庁は「くもり 後 一時 雨」、降水確率70%（11/2時点）。夕方〜帰り道が怪しい</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-jacket"><span>脱ぎ着できる上着<small>朝6時台は13°前後（体感11°くらい）で、6:20から外で待つ。日中も16°くらいまで</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-shoes"><span>歩き慣れた靴<small>早朝の待機から18時まで立つ・歩くがずっと続く。雨でも滑りにくいもの</small></span><span></span></label></li>
+  </ul>
+  <p class="group-h">あると安心</p>
+  <ul class="checks">
+    <li><label><input type="checkbox" id="i-drink"><span>飲み物<small>早朝の待機用。舞浜駅のNewDaysは6:30開店で、5:56着では開いていない</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-food"><span>朝ごはん・小腹用の軽食（差し入れのパンも）<small>園内では食べず、パーク外のピクニックエリアで。差し入れはするなら</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-cash"><span>現金を少し<small>タクシーにする場合（1,000〜1,500円くらい）や、カードが使えないときの予備</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-bag"><span>大きめの袋・エコバッグ<small>買ったものや脱いだ上着を入れる。濡れた傘用のビニール袋も</small></span><span></span></label></li>
+    <li><label><input type="checkbox" id="i-towel"><span>タオル・ハンカチ<small>雨や手洗い用</small></span><span></span></label></li>
+  </ul>
+  <p class="note">雨と気温は11/2時点の予報から。前日に<a href="#weather">天気</a>を見直す。</p>
 </section>
 
 <section id="move">
@@ -450,8 +479,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     <li><label><input type="checkbox" id="p-app"><span>アプリのログインと、二人のチケットのグループ共有</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-pay"><span>決済方法の登録、希望商品のお気に入り登録</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-ic"><span>Suica・PASMOの残高</span><span></span></label></li>
-    <li><label><input type="checkbox" id="p-bag"><span>モバイルバッテリー・上着・雨具・歩き慣れた靴</span><span></span></label></li>
-    <li><label><input type="checkbox" id="p-snack"><span>差し入れのパン（するなら）</span><span></span></label></li>
+    <li><label><input type="checkbox" id="p-items"><span><a href="#items">持ち物</a>をそろえる。スマホとモバイルバッテリーは充電しておく</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-train"><span>新幹線の乗車駅・発車時刻が分かったら、<a href="#home">帰り</a>で退園時刻を決める</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-weather"><span><a href="#weather">天気予報</a>と電車の運行情報を見る</span><span></span></label></li>
     <li><label><input type="checkbox" id="p-meet"><span>集合場所・時刻を決める（駅改札外など公共の場所）</span><span></span></label></li>
@@ -478,6 +506,14 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
 <script>
 (function () {
   var R = "https://www.tokyodisneyresort.jp/tds/restaurant/";
+  // 地図は最初は閉じておき、開いたときだけ画像を読む。絞り込みで描き直しても開閉は保つ
+  var openMaps = {};
+  function mapBlock(src, name) {
+    var open = !!openMaps[src];
+    return '<details class="mapbox" data-map="' + src + '"' + (open ? " open" : "") + '><summary>地図を見る</summary>' +
+      '<button type="button" class="map-btn" data-zoom="' + src + '" aria-label="' + name + 'の地図を拡大">' +
+      '<img ' + (open ? 'src="' : 'data-src="') + src + '" alt="' + name + 'の場所（公式マップ）" width="800" height="450"><span>タップで拡大</span></button></details>';
+  }
   var SHOPS = [
     { id: "zambini", img: "map-zambini.jpg", name: "ザンビーニ・ブラザーズ・リストランテ", use: "ランチ第一候補", area: "harbor", areaName: "メディテレーニアンハーバー（入口側）", open: "9:00", close: "21:00",
       genre: "パスタ・ピッツァ", menu: "ミートボール・スパゲッティ 1,200円／マルゲリータ 750円／スペシャルセット 2,050円", order: "カウンター／MO", mo: true, code: 403, top: true, kw: "イタリアン パスタ ピザ ピッツァ" },
@@ -530,8 +566,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       '<span class="status ' + st.cls + '">' + st.text + "</span></header>" +
       '<dl class="facts num"><dt>時間</dt><dd>' + hours + "</dd><dt>料理</dt><dd>" + s.genre + "</dd><dt>例</dt><dd>" + s.menu + "</dd><dt>注文</dt><dd>" + s.order + "</dd></dl>" +
       (s.mo ? '<div class="tags"><span class="tag mo">MO</span></div>' : "") +
-      '<button type="button" class="map-btn" data-zoom="img/' + s.img + '" aria-label="' + s.name + 'の地図を拡大">' +
-      '<img src="img/' + s.img + '" alt="' + s.name + 'の場所（公式マップ）" width="800" height="450" loading="lazy"><span>タップで拡大</span></button>' +
+      mapBlock("img/" + s.img, s.name) +
       '<p class="links"><a href="' + R + "food/" + s.code + '/" target="_blank" rel="noopener">メニュー（公式）</a>' +
       '<a href="' + R + "detail/" + s.code + '/" target="_blank" rel="noopener">店舗ページ</a></p></article>';
   }
@@ -662,8 +697,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
     return '<article class="shop"><header><div><p class="use">' + a.use + "</p><h3>" + a.name + '</h3><p class="area">' + a.area + "</p></div>" +
       '<span class="dpa">' + (a.dpa ? "DPA " + a.dpa : "DPAなし") + "</span></header>" +
       '<dl class="facts"><dt>内容</dt><dd>' + a.what + "</dd><dt>メモ</dt><dd>" + a.note + "</dd></dl>" +
-      '<button type="button" class="map-btn" data-zoom="img/at-' + a.img + '.jpg" aria-label="' + a.name + 'の地図を拡大">' +
-      '<img src="img/at-' + a.img + '.jpg" alt="' + a.name + 'の場所（公式マップ）" width="800" height="450" loading="lazy"><span>タップで拡大</span></button>' +
+      mapBlock("img/at-" + a.img + ".jpg", a.name) +
       '<p class="links"><a href="https://www.tokyodisneyresort.jp/tds/attraction/detail/' + a.code + '/" target="_blank" rel="noopener">公式ページ</a></p></article>';
   }).join("");
 
@@ -705,7 +739,8 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
   });
   document.addEventListener("toggle", function (e) {
     var d = e.target;
-    if (d.matches && d.matches("details.place") && d.open) {
+    if (d.dataset && d.dataset.map) openMaps[d.dataset.map] = d.open;
+    if (d.matches && d.matches("details.place, details.mapbox") && d.open) {
       var img = d.querySelector("img[data-src]");
       if (img) { img.src = img.dataset.src; img.removeAttribute("data-src"); }
     }
