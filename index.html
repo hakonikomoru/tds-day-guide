@@ -330,9 +330,9 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
 <section id="move">
   <h2>朝の移動 <small>始発ルート</small></h2>
   <ol class="legs num">
-    <li class="leg"><time>5:00</time><div class="body"><p class="what">流山おおたかの森駅に着く</p><p class="detail">家を出る時間は駅までの時間から逆算。朝ごはんは出発前に軽く。</p></div></li>
-    <li class="leg"><time>5:12</time><div class="body"><p class="what"><span class="line-tag">TX</span>区間快速・秋葉原行</p><p class="detail">流山おおたかの森 → 南流山（5:16着）</p></div></li>
-    <li class="leg"><time>5:27</time><div class="body"><p class="what"><span class="line-tag">JR</span>武蔵野線・東京行（2番線）</p><p class="detail">南流山で乗り換え待ち11分。西船橋・市川塩浜で乗り換えず、そのまま舞浜へ。</p></div></li>
+    <li class="leg"><time>5:10</time><div class="body"><p class="what">流山おおたかの森駅に着く（目安）</p><p class="detail">5:18発に乗る。家を出る時間は駅までの時間から逆算。朝ごはんは出発前に軽く。</p></div></li>
+    <li class="leg"><time>5:18</time><div class="body"><p class="what"><span class="line-tag">TX</span>秋葉原行（3・4番線）</p><p class="detail">流山おおたかの森 → 南流山（5:23着・2番線）</p></div></li>
+    <li class="leg"><time>5:27</time><div class="body"><p class="what"><span class="line-tag">JR</span>武蔵野線・東京行（2番線）</p><p class="detail">南流山で乗り換え待ち4分。西船橋・市川塩浜で乗り換えず、そのまま舞浜へ。</p></div></li>
     <li class="leg"><time>5:56</time><div class="body"><p class="what">舞浜 着</p><p class="detail">南口を出て左へ。リゾートゲートウェイ・ステーションまで徒歩2分目安。寄り道せず、走らず。</p></div></li>
     <li class="leg"><time>6:03</time><div class="body"><p class="what"><span class="line-tag">モノレール</span>リゾートライン始発</p><p class="detail">ランド・ベイサイド経由で約9分。乗れなければ次便（4〜13分間隔）か徒歩。</p></div></li>
     <li class="leg"><time>6:12</time><div class="body"><p class="what">東京ディズニーシー・ステーション</p><p class="detail">エントランスへ。合流・待機開始は6:20〜6:30が目安。6:00ちょうどの集合には間に合わない。</p></div></li>
@@ -841,7 +841,7 @@ footer { padding-block: 30px 90px; font-size: 12px; color: var(--muted); display
       current.classList.add("is-now");
       card.innerHTML = "<b>" + hhmm + "　いまは「" + current.querySelector(".what").textContent + "」</b><p class=\"note\">" + current.querySelector(".detail").textContent + "</p>";
     } else if (now.m < mins("6:20")) {
-      card.innerHTML = "<b>" + hhmm + "　移動中</b><p class=\"note\">5:12 TX → 5:27 JR武蔵野線 → 5:56舞浜 → 6:03モノレール。下の「朝の移動」を見る。</p>";
+      card.innerHTML = "<b>" + hhmm + "　移動中</b><p class=\"note\">5:18 TX → 5:27 JR武蔵野線 → 5:56舞浜 → 6:03モノレール。下の「朝の移動」を見る。</p>";
     } else {
       card.innerHTML = "<b>" + hhmm + "　おつかれさま</b><p class=\"note\">帰りは「帰り」の章を見る。舞浜で別れるなら舞浜 → 南流山 → 流山おおたかの森。</p>";
     }
